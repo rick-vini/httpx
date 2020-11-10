@@ -555,11 +555,13 @@ long-lived network connections such as WebSockets.</p>
 async client for sending outgoing HTTP requests.</p>
 <h2 id="making-async-requests">Making Async requests</h2>
 <p>To make asynchronous requests, you'll need an <code>AsyncClient</code>.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.com/&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.com/&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
+
 
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -583,23 +585,26 @@ use async methods.</p>
 </ul>
 <h3 id="opening-and-closing-clients">Opening and closing clients</h3>
 <p>Use <code>async with httpx.AsyncClient()</code> if you want a context-managed client...</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
 
+
 <p>Alternatively, use <code>await client.aclose()</code> if you want to close a client explicitly:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
 <span class="o">...</span>
 <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">aclose</span><span class="p">()</span>
 </code></pre></div>
 
+
 <h3 id="streaming-responses">Streaming responses</h3>
 <p>The <code>AsyncClient.stream(method, url, ...)</code> method is an async context block.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;https://www.example.com/&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">aiter_bytes</span><span class="p">():</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="o">...</span>
+<span class="gp">... </span>    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">aiter_bytes</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="o">...</span>
 </code></pre></div>
+
 
 <p>The async response streaming methods are:</p>
 <ul>
@@ -612,7 +617,7 @@ use async methods.</p>
 </ul>
 <p>For situations when context block usage is not practical, it is possible to enter "manual mode" by sending a <a href="../advanced/#request-instances"><code>Request</code> instance</a> using <code>client.send(..., stream=True)</code>.</p>
 <p>Example in the context of forwarding the response to a streaming web endpoint with <a href="https://www.starlette.io">Starlette</a>:</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">from</span> <span class="nn">starlette.background</span> <span class="kn">import</span> <span class="n">BackgroundTask</span>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">StreamingResponse</span>
 
@@ -624,17 +629,19 @@ use async methods.</p>
     <span class="k">return</span> <span class="n">StreamingResponse</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">aiter_text</span><span class="p">(),</span> <span class="n">background</span><span class="o">=</span><span class="n">BackgroundTask</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">aclose</span><span class="p">))</span>
 </code></pre></div>
 
+
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>When using this "manual streaming mode", it is your duty as a developer to make sure that <code>Response.aclose()</code> is called eventually. Failing to do so would leave connections open, most likely resulting in resource leaks down the line.</p>
 </div>
 <h3 id="streaming-requests">Streaming requests</h3>
 <p>When sending a streaming request body with an <code>AsyncClient</code> instance, you should use an async bytes generator instead of a bytes generator:</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">upload_bytes</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">upload_bytes</span><span class="p">():</span>
     <span class="o">...</span>  <span class="c1"># yield byte content</span>
 
 <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">upload_bytes</span><span class="p">())</span>
 </code></pre></div>
+
 
 <h2 id="supported-async-environments">Supported async environments</h2>
 <p>HTTPX supports either <code>asyncio</code> or <code>trio</code> as an async environment.</p>
@@ -643,7 +650,7 @@ for socket operations and concurrency primitives.</p>
 <h3 id="asyncio"><a href="https://docs.python.org/3/library/asyncio.html">AsyncIO</a></h3>
 <p>AsyncIO is Python's <a href="https://docs.python.org/3/library/asyncio.html">built-in library</a>
 for writing concurrent code with the async/await syntax.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -654,10 +661,11 @@ for writing concurrent code with the async/await syntax.</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div>
 
+
 <h3 id="trio"><a href="https://github.com/python-trio/trio">Trio</a></h3>
 <p>Trio is <a href="https://trio.readthedocs.io/en/stable/">an alternative async library</a>,
 designed around the <a href="https://en.wikipedia.org/wiki/Structured_concurrency">the principles of structured concurrency</a>.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">import</span> <span class="nn">trio</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -668,6 +676,7 @@ designed around the <a href="https://en.wikipedia.org/wiki/Structured_concurrenc
 <span class="n">trio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
 </code></pre></div>
 
+
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The <code>trio</code> package must be installed to use the Trio backend.</p>
@@ -676,7 +685,7 @@ designed around the <a href="https://en.wikipedia.org/wiki/Structured_concurrenc
 <p>Just as <code>httpx.Client</code> allows you to call directly into WSGI web applications,
 the <code>httpx.AsyncClient</code> class allows you to call directly into ASGI web applications.</p>
 <p>Let's take this Starlette application as an example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
 <span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">HTMLResponse</span>
 <span class="kn">from</span> <span class="nn">starlette.routing</span> <span class="kn">import</span> <span class="n">Route</span>
 
@@ -688,13 +697,15 @@ the <code>httpx.AsyncClient</code> class allows you to call directly into ASGI w
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="p">[</span><span class="n">Route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">hello</span><span class="p">)])</span>
 </code></pre></div>
 
+
 <p>We can make requests directly against the application, like so:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://testserver&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
 <span class="gp">... </span>    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;Hello World!&quot;</span>
 </code></pre></div>
+
 
 <p>For some more complex cases you might need to customise the ASGI transport. This allows you to:</p>
 <ul>
@@ -703,12 +714,13 @@ the <code>httpx.AsyncClient</code> class allows you to call directly into ASGI w
 <li>Use a given client address for requests by setting <code>client</code>.</li>
 </ul>
 <p>For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Instantiate a client that makes ASGI requests with a client IP of &quot;1.2.3.4&quot;,</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instantiate a client that makes ASGI requests with a client IP of &quot;1.2.3.4&quot;,</span>
 <span class="c1"># on port 123.</span>
 <span class="n">transport</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">ASGITransport</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">))</span>
 <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://testserver&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
+
 
 <p>See <a href="https://asgi.readthedocs.io/en/latest/specs/www.html#connection-scope">the ASGI documentation</a> for more details on the <code>client</code> and <code>root_path</code> keys.</p>
                 

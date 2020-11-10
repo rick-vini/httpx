@@ -607,106 +607,121 @@
                 
                 <h1 id="quickstart">QuickStart</h1>
 <p>First, start by importing HTTPX:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 </code></pre></div>
 
+
 <p>Now, let’s try to get a webpage.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
 
+
 <p>Similarly, to make an HTTP POST request:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/post&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">})</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/post&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">})</span>
 </code></pre></div>
 
+
 <p>The PUT, DELETE, HEAD, and OPTIONS requests all follow the same style:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/put&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">})</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/put&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/delete&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h2 id="passing-parameters-in-urls">Passing Parameters in URLs</h2>
 <p>To include URL query parameters in the request, use the <code>params</code> keyword:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="s1">&#39;value2&#39;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="s1">&#39;value2&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>To see how the values get encoding into the URL string, we can inspect the
 resulting URL that was used to make the request:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">url</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">url</span>
 <span class="go">URL(&#39;https://httpbin.org/get?key2=value2&amp;key1=value1&#39;)</span>
 </code></pre></div>
 
+
 <p>You can also pass a list of items as a value:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">,</span> <span class="s1">&#39;value3&#39;</span><span class="p">]}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">,</span> <span class="s1">&#39;value3&#39;</span><span class="p">]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">url</span>
 <span class="go">URL(&#39;https://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3&#39;)</span>
 </code></pre></div>
 
+
 <h2 id="response-content">Response Content</h2>
 <p>HTTPX will automatically handle decoding the response content into Unicode text.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.org/&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.org/&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">text</span>
 <span class="go">&#39;&lt;!doctype html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;Example Domain&lt;/title&gt;...&#39;</span>
 </code></pre></div>
 
+
 <p>You can inspect what encoding will be used to decode the response.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
 <span class="go">&#39;UTF-8&#39;</span>
 </code></pre></div>
+
 
 <p>In some cases the response may not contain an explicit encoding, in which case HTTPX
 will attempt to automatically determine an encoding to use. This defaults to
 UTF-8, but also includes robust fallback behaviour for handling ascii,
 iso-8859-1 and windows 1252 encodings.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
 <span class="go">None</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">text</span>
 <span class="go">&#39;&lt;!doctype html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;Example Domain&lt;/title&gt;...&#39;</span>
 </code></pre></div>
 
+
 <p>If you need to override the standard behaviour and explicitly set the encoding to
 use, then you can do that too.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;ISO-8859-1&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;ISO-8859-1&#39;</span>
 </code></pre></div>
+
 
 <h2 id="binary-response-content">Binary Response Content</h2>
 <p>The response content can also be accessed as bytes, for non-text responses:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">content</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">content</span>
 <span class="go">b&#39;&lt;!doctype html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;Example Domain&lt;/title&gt;...&#39;</span>
 </code></pre></div>
+
 
 <p>Any <code>gzip</code> and <code>deflate</code> HTTP response encodings will automatically
 be decoded for you. If <code>brotlipy</code> is installed, then the <code>brotli</code> response
 encoding will also be supported.</p>
 <p>For example, to create an image from binary data returned by a request, you can use the following code:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
 </code></pre></div>
 
+
 <h2 id="json-response-content">JSON Response Content</h2>
 <p>Often Web API responses will be encoded as JSON.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/events&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/events&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="go">[{u&#39;repository&#39;: {u&#39;open_issues&#39;: 0, u&#39;url&#39;: &#39;https://github.com/...&#39; ...  }}]</span>
 </code></pre></div>
 
+
 <h2 id="custom-headers">Custom Headers</h2>
 <p>To include additional headers in the outgoing request, use the <code>headers</code> keyword argument:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://httpbin.org/headers&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://httpbin.org/headers&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="s1">&#39;my-app/0.0.1&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="sending-form-encoded-data">Sending Form Encoded Data</h2>
 <p>Some types of HTTP requests, such as <code>POST</code> and <code>PUT</code> requests, can include data
 in the request body. One common way of including that is as form-encoded data,
 which is used for HTML forms.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="s1">&#39;value2&#39;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="s1">&#39;value2&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -719,8 +734,9 @@ which is used for HTML forms.</p>
 <span class="go">}</span>
 </code></pre></div>
 
+
 <p>Form encoded data can also include multiple values from a given key.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;value2&#39;</span><span class="p">]}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;value2&#39;</span><span class="p">]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -735,9 +751,10 @@ which is used for HTML forms.</p>
 <span class="go">}</span>
 </code></pre></div>
 
+
 <h2 id="sending-multipart-file-uploads">Sending Multipart File Uploads</h2>
 <p>You can also upload files, using HTTP multipart encoding:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -748,10 +765,11 @@ which is used for HTML forms.</p>
 <span class="go">  ...</span>
 <span class="go">}</span>
 </code></pre></div>
+
 
 <p>You can also explicitly set the filename and content type, by using a tuple
 of items for the file value:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;application/vnd.ms-excel&#39;</span><span class="p">)}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;application/vnd.ms-excel&#39;</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -763,8 +781,9 @@ of items for the file value:</p>
 <span class="go">}</span>
 </code></pre></div>
 
+
 <p>If you need to include non-file data fields in the multipart form, use the <code>data=...</code> parameter:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
@@ -780,10 +799,11 @@ of items for the file value:</p>
 <span class="go">}</span>
 </code></pre></div>
 
+
 <h2 id="sending-json-encoded-data">Sending JSON Encoded Data</h2>
 <p>Form encoded data is okay if all you need is a simple key-value data structure.
 For more complicated data structures you'll often want to use JSON encoding instead.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;boolean&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;boolean&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -801,29 +821,33 @@ For more complicated data structures you'll often want to use JSON encoding inst
 <span class="go">}</span>
 </code></pre></div>
 
+
 <h2 id="sending-binary-request-data">Sending Binary Request Data</h2>
 <p>For other encodings, you should use the <code>content=...</code> parameter, passing
 either a <code>bytes</code> type or a generator that yields <code>bytes</code>.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello, world&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello, world&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>You may also want to set a custom <code>Content-Type</code> header when uploading
 binary data.</p>
 <h2 id="response-status-codes">Response Status Codes</h2>
 <p>We can inspect the HTTP status code of the response:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="go">200</span>
 </code></pre></div>
 
+
 <p>HTTPX also includes an easy shortcut for accessing status codes by their text phrase.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">httpx</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">OK</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">httpx</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">OK</span>
 <span class="go">True</span>
 </code></pre></div>
 
+
 <p>We can raise an exception for any Client or Server error responses (4xx or 5xx status codes):</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">not_found</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/status/404&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">not_found</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/status/404&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">not_found</span><span class="o">.</span><span class="n">status_code</span>
 <span class="go">404</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">not_found</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
@@ -834,13 +858,15 @@ binary data.</p>
 <span class="go">For more information check: https://httpstatuses.com/404</span>
 </code></pre></div>
 
+
 <p>Any successful response codes will simply return <code>None</code> rather than raising an exception.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 </code></pre></div>
+
 
 <h2 id="response-headers">Response Headers</h2>
 <p>The response headers are available as a dictionary-like interface.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span>
 <span class="go">Headers({</span>
 <span class="go">    &#39;content-encoding&#39;: &#39;gzip&#39;,</span>
 <span class="go">    &#39;transfer-encoding&#39;: &#39;chunked&#39;,</span>
@@ -852,13 +878,15 @@ binary data.</p>
 <span class="go">})</span>
 </code></pre></div>
 
+
 <p>The <code>Headers</code> data type is case-insensitive, so you can use any capitalization.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span>
 <span class="go">&#39;application/json&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">)</span>
 <span class="go">&#39;application/json&#39;</span>
 </code></pre></div>
+
 
 <p>Multiple values for a single response header are represented as a single comma-separated value, as per <a href="https://tools.ietf.org/html/rfc7230#section-3.2">RFC 7230</a>:</p>
 <blockquote>
@@ -867,54 +895,61 @@ binary data.</p>
 <h2 id="streaming-responses">Streaming Responses</h2>
 <p>For large downloads you may want to use streaming responses that do not load the entire response body into memory at once.</p>
 <p>You can stream the binary content of the response...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_bytes</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Or the text of the response...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_text</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Or stream the text, on a line-by-line basis...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_lines</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>HTTPX will use universal line endings, normalising all cases to <code>\n</code>.</p>
 <p>In some cases you might want to access the raw bytes on the response without applying any HTTP content decoding. In this case any content encoding that the web server has applied such as <code>gzip</code>, <code>deflate</code>, or <code>brotli</code> will not be automatically decoded.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_raw</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>If you're using streaming responses in any of these ways then the <code>response.content</code> and <code>response.text</code> attributes will not be available, and will raise errors if accessed. However you can also use the response streaming functionality to conditionally load the response body:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">TOO_LONG</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="n">r</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h2 id="cookies">Cookies</h2>
 <p>Any cookies that are set on the response can be easily accessed:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies/set?chocolate=chip&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies/set?chocolate=chip&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">cookies</span><span class="p">[</span><span class="s1">&#39;chocolate&#39;</span><span class="p">]</span>
 <span class="go">&#39;chip&#39;</span>
 </code></pre></div>
 
+
 <p>To include cookies in an outgoing request, use the <code>cookies</code> parameter:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;peanut&quot;</span><span class="p">:</span> <span class="s2">&quot;butter&quot;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;peanut&quot;</span><span class="p">:</span> <span class="s2">&quot;butter&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies&#39;</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="go">{&#39;cookies&#39;: {&#39;peanut&#39;: &#39;butter&#39;}}</span>
 </code></pre></div>
 
+
 <p>Cookies are returned in a <code>Cookies</code> instance, which is a dict-like data structure
 with additional API for accessing cookies by their domain or path.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Cookies</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Cookies</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;cookie_on_domain&#39;</span><span class="p">,</span> <span class="s1">&#39;hello, there!&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;httpbin.org&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cookies</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;cookie_off_domain&#39;</span><span class="p">,</span> <span class="s1">&#39;nope.&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;example.org&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies&#39;</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
@@ -922,13 +957,14 @@ with additional API for accessing cookies by their domain or path.</p>
 <span class="go">{&#39;cookies&#39;: {&#39;cookie_on_domain&#39;: &#39;hello, there!&#39;}}</span>
 </code></pre></div>
 
+
 <h2 id="redirection-and-history">Redirection and History</h2>
 <p>By default, HTTPX will follow redirects for anything except <code>HEAD</code> requests.</p>
 <p>The <code>history</code> property of the response can be used to inspect any followed redirects.
 It contains a list of any redirect responses that were followed, in the order
 in which they were made.</p>
 <p>For example, GitHub redirects all HTTP requests to HTTPS.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">url</span>
 <span class="go">URL(&#39;https://github.com/&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
@@ -937,21 +973,24 @@ in which they were made.</p>
 <span class="go">[&lt;Response [301 Moved Permanently]&gt;]</span>
 </code></pre></div>
 
+
 <p>You can modify the default redirection handling with the allow_redirects parameter:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="go">301</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">history</span>
 <span class="go">[]</span>
 </code></pre></div>
 
+
 <p>If you’re making a <code>HEAD</code> request, you can use this to enable redirection:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="s1">&#39;http://github.com/&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">url</span>
 <span class="go">&#39;https://github.com/&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">history</span>
 <span class="go">[&lt;Response [301 Moved Permanently]&gt;]</span>
 </code></pre></div>
+
 
 <h2 id="timeouts">Timeouts</h2>
 <p>HTTPX defaults to including reasonable timeouts for all network operations,
@@ -959,12 +998,14 @@ meaning that if a connection is not properly established then it should always
 raise an error rather than hanging indefinitely.</p>
 <p>The default timeout for network inactivity is five seconds. You can modify the
 value to be more or less strict:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://github.com/&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://github.com/&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>You can also disable the timeout behavior completely...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://github.com/&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://github.com/&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>For advanced timeout management, see <a href="../advanced/#fine-tuning-the-configuration">Timeout fine-tuning</a>.</p>
 <h2 id="authentication">Authentication</h2>
@@ -972,14 +1013,15 @@ value to be more or less strict:</p>
 <p>To provide Basic authentication credentials, pass a 2-tuple of
 plaintext <code>str</code> or <code>bytes</code> objects as the <code>auth</code> argument to the request
 functions:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;my_user&quot;</span><span class="p">,</span> <span class="s2">&quot;password123&quot;</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;my_user&quot;</span><span class="p">,</span> <span class="s2">&quot;password123&quot;</span><span class="p">))</span>
 </code></pre></div>
+
 
 <p>To provide credentials for Digest authentication you'll need to instantiate
 a <code>DigestAuth</code> object with the plaintext username and password as arguments.
 This object can be then passed as the <code>auth</code> argument to the request methods
 as above:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">DigestAuth</span><span class="p">(</span><span class="s2">&quot;my_user&quot;</span><span class="p">,</span> <span class="s2">&quot;password123&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">auth</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">DigestAuth</span><span class="p">(</span><span class="s2">&quot;my_user&quot;</span><span class="p">,</span> <span class="s2">&quot;password123&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>

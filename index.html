@@ -432,7 +432,7 @@
                 
                 
                 <p align="center" style="margin: 0 0 10px">
-  <img width="350" height="208" src="https://raw.githubusercontent.com/encode/httpx/master/docs/img/logo.jpg" alt='HTTPX'>
+  <img width="350" height="208" src="https://raw.githubusercontent.com/encode/httpx/master/docs/img/butterfly.png" alt='HTTPX'>
 </p>
 
 <h1 align="center" style="font-size: 3rem; margin: -15px 0">
@@ -462,7 +462,7 @@ HTTPX
 </div>
 <hr />
 <p>Let's get started...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.org/&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
@@ -474,14 +474,17 @@ HTTPX
 <span class="go">&#39;&lt;!doctype html&gt;\n&lt;html&gt;\n&lt;head&gt;\n&lt;title&gt;Example Domain&lt;/title&gt;...&#39;</span>
 </code></pre></div>
 
+
 <p>Or, using the async API...</p>
 <p><em>Use <a href="https://ipython.readthedocs.io/en/stable/">IPython</a> or Python 3.8+ with <code>python -m asyncio</code> to try this code interactively.</em></p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.org/&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.example.org/&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
+
 
 <h2 id="features">Features</h2>
 <p>HTTPX is a high performance asynchronous HTTP client, that builds on the
@@ -536,16 +539,19 @@ much of this work follows, as well as to <code>urllib3</code> for plenty of desi
 inspiration around the lower-level networking details.</p>
 <h2 id="installation">Installation</h2>
 <p>Install with pip:</p>
-<div class="shell codehilite"><pre><span></span><code>$ pip install httpx
+<div class="codehilite"><pre><span></span><code>$ pip install httpx
 </code></pre></div>
+
 
 <p>Or, to include the optional HTTP/2 support, use:</p>
-<div class="shell codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>http2<span class="o">]</span>
+<div class="codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>http2<span class="o">]</span>
 </code></pre></div>
 
+
 <p>To include the optional brotli decoder support, use:</p>
-<div class="shell codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>brotli<span class="o">]</span>
+<div class="codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>brotli<span class="o">]</span>
 </code></pre></div>
+
 
 <p>HTTPX requires Python 3.6+</p>
                 

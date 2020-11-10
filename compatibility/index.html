@@ -587,14 +587,16 @@ Use <code>str(response.url)</code> if you need a string instance.</p>
 <p>For uploading raw text or binary content we prefer to use a <code>content</code> parameter,
 in order to better separate this usage from the case of uploading form data.</p>
 <p>For example, using <code>content=...</code> to upload raw content:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Uploading text, bytes, or a bytes iterator.</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Uploading text, bytes, or a bytes iterator.</span>
 <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;Hello, world&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>And using <code>data=...</code> to send form data:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Uploading form data.</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Uploading form data.</span>
 <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, world&quot;</span><span class="p">})</span>
 </code></pre></div>
+
 
 <p>If you're using a type checking tool such as <code>mypy</code>, you'll see warnings issues if using test/byte content with the <code>data</code> argument.
 However, for compatibility reasons with <code>requests</code>, we do still handle the case where <code>data=...</code> is used with raw binary and text contents.</p>
@@ -604,9 +606,10 @@ However, for compatibility reasons with <code>requests</code>, we do still handl
 <h2 id="streaming-responses">Streaming responses</h2>
 <p>HTTPX provides a <code>.stream()</code> interface rather than using <code>stream=True</code>. This ensures that streaming responses are always properly closed outside of the stream block, and makes it visually clearer at which points streaming I/O APIs may be used with a response.</p>
 <p>For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
+
 
 <p>Within a <code>stream()</code> block request data is made available with:</p>
 <ul>
@@ -631,12 +634,14 @@ However, for compatibility reasons with <code>requests</code>, we do still handl
 <p>We don't support <code>response.is_ok</code> since the naming is ambiguous there, and might incorrectly imply an equivalence to <code>response.status_code == codes.OK</code>. Instead we provide the <code>response.is_error</code> property. Use <code>if not response.is_error:</code> instead of <code>if response.is_ok:</code>.</p>
 <h2 id="client-instances">Client instances</h2>
 <p>The HTTPX equivalent of <code>requests.Session</code> is <code>httpx.Client</code>.</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>is generally equivalent to</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="request-instantiation">Request instantiation</h2>
 <p>There is no notion of <a href="https://requests.readthedocs.io/en/stable/user/advanced/#prepared-requests">prepared requests</a> in HTTPX. If you need to customize request instantiation, see <a href="/advanced#request-instances">Request instances</a>.</p>
@@ -651,7 +656,7 @@ However, for compatibility reasons with <code>requests</code>, we do still handl
 <h2 id="determining-the-next-redirect-request">Determining the next redirect request</h2>
 <p>When using <code>allow_redirects=False</code>, the <code>requests</code> library exposes an attribute <code>response.next</code>, which can be used to obtain the next redirect request.</p>
 <p>In HTTPX, this attribute is instead named <code>response.next_request</code>. For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
 <span class="n">request</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">build_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 <span class="k">while</span> <span class="n">request</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

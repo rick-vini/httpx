@@ -430,20 +430,23 @@ It is possible that a future version of <code>httpx</code> may enable HTTP/2 sup
 <p>If you're issuing highly concurrent requests you might want to consider
 trying out our HTTP/2 support. You can do so by first making sure to install
 the optional HTTP/2 dependencies...</p>
-<div class="shell codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>http2<span class="o">]</span>
+<div class="codehilite"><pre><span></span><code>$ pip install httpx<span class="o">[</span>http2<span class="o">]</span>
 </code></pre></div>
 
+
 <p>And then then instantiating a client with HTTP/2 support enabled:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
+
 
 <p>You can also instantiate a client as a context manager, to ensure that all
 HTTP connections are nicely scoped, and will be closed once the context block
 is exited.</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
+
 
 <p>HTTP/2 support is available on both <code>Client</code> and <code>AsyncClient</code>, although it's
 typically more useful in async contexts if you're issuing lots of concurrent
@@ -455,7 +458,7 @@ requests and responses will be transported over HTTP/2, since both the client
 supports HTTP/1.1 the client will use a standard HTTP/1.1 connection instead.</p>
 <p>You can determine which version of the HTTP protocol was used by examining
 the <code>.http_version</code> property on the response.</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">http2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">http_version</span><span class="p">)</span>  <span class="c1"># &quot;HTTP/1.0&quot;, &quot;HTTP/1.1&quot;, or &quot;HTTP/2&quot;.</span>
 </code></pre></div>

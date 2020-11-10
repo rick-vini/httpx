@@ -1124,30 +1124,33 @@
 <p>The other sections on this page go into further detail about what you can do with a <code>Client</code> instance.</p>
 <h3 id="usage">Usage</h3>
 <p>The recommended way to use a <code>Client</code> is as a context manager. This will ensure that connections are properly cleaned up when leaving the <code>with</code> block:</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
 
+
 <p>Alternatively, you can explicitly close the connection pool without block-usage using <code>.close()</code>:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="o">...</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>
 
+
 <h3 id="making-requests">Making requests</h3>
 <p>Once you have a <code>Client</code>, you can send requests using <code>.get()</code>, <code>.post()</code>, etc. For example:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
 
+
 <p>These methods accept the same arguments as <code>httpx.get()</code>, <code>httpx.post()</code>, etc. This means that all features documented in the <a href="/quickstart">Quickstart</a> guide are also available at the client level.</p>
 <p>For example, to send a request with custom headers:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Custom&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -1155,10 +1158,11 @@
 <span class="go">&#39;value&#39;</span>
 </code></pre></div>
 
+
 <h3 id="sharing-configuration-across-requests">Sharing configuration across requests</h3>
 <p>Clients allow you to apply configuration to all outgoing requests by passing parameters to the <code>Client</code> constructor.</p>
 <p>For example, to apply a set of custom headers <em>on every request</em>:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://httpbin.org/headers&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://httpbin.org/headers&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="s1">&#39;my-app/0.0.1&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -1167,12 +1171,13 @@
 <span class="go">&#39;my-app/0.0.1&#39;</span>
 </code></pre></div>
 
+
 <h3 id="merging-of-configuration">Merging of configuration</h3>
 <p>When a configuration option is provided at both the client-level and request-level, one of two things can happen:</p>
 <ul>
 <li>For headers, query parameters and cookies, the values are combined together. For example:</li>
 </ul>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Auth&#39;</span><span class="p">:</span> <span class="s1">&#39;from-client&#39;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Auth&#39;</span><span class="p">:</span> <span class="s1">&#39;from-client&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;client1&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Custom&#39;</span><span class="p">:</span> <span class="s1">&#39;from-request&#39;</span><span class="p">}</span>
@@ -1187,10 +1192,11 @@
 <span class="go">&#39;from-request&#39;</span>
 </code></pre></div>
 
+
 <ul>
 <li>For all other parameters, the request-level value takes priority. For example:</li>
 </ul>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;tom&#39;</span><span class="p">,</span> <span class="s1">&#39;mot123&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;tom&#39;</span><span class="p">,</span> <span class="s1">&#39;mot123&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;ecila123&#39;</span><span class="p">))</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">auth</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -1199,16 +1205,18 @@
 <span class="go">b&#39;alice:ecila123&#39;</span>
 </code></pre></div>
 
+
 <p>If you need finer-grained control on the merging of client-level and request-level parameters, see <a href="#request-instances">Request instances</a>.</p>
 <h3 id="other-client-only-configuration-options">Other Client-only configuration options</h3>
 <p>Additionally, <code>Client</code> accepts some configuration options that aren't available at the request level.</p>
 <p>For example, <code>base_url</code> allows you to prepend an URL to all outgoing requests:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s1">&#39;http://httpbin.org&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s1">&#39;http://httpbin.org&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/headers&#39;</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span>
 <span class="go">URL(&#39;http://httpbin.org/headers&#39;)</span>
 </code></pre></div>
+
 
 <p>For a list of all available client parameters, see the <a href="/api/#client"><code>Client</code></a> API reference.</p>
 <h2 id="calling-into-python-web-apps">Calling into Python Web Apps</h2>
@@ -1219,7 +1227,7 @@
 <li>Mocking out external services during tests or in dev/staging environments.</li>
 </ul>
 <p>Here's an example of integrating against a Flask application:</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 
 
@@ -1235,6 +1243,7 @@
     <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;Hello World!&quot;</span>
 </code></pre></div>
 
+
 <p>For some more complex cases you might need to customize the WSGI transport. This allows you to:</p>
 <ul>
 <li>Inspect 500 error responses rather than raise exceptions by setting <code>raise_app_exceptions=False</code>.</li>
@@ -1242,25 +1251,28 @@
 <li>Use a given client address for requests by setting <code>remote_addr</code> (WSGI).</li>
 </ul>
 <p>For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Instantiate a client that makes WSGI requests with a client IP of &quot;1.2.3.4&quot;.</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Instantiate a client that makes WSGI requests with a client IP of &quot;1.2.3.4&quot;.</span>
 <span class="n">transport</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">WSGITransport</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">remote_addr</span><span class="o">=</span><span class="s2">&quot;1.2.3.4&quot;</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://testserver&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
 
+
 <h2 id="request-instances">Request instances</h2>
 <p>For maximum control on what gets sent over the wire, HTTPX supports building explicit <a href="/api#request"><code>Request</code></a> instances:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">request</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">request</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>To dispatch a <code>Request</code> instance across to the network, create a <a href="#client-instances"><code>Client</code> instance</a> and use <code>.send()</code>:</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="o">...</span>
 </code></pre></div>
 
+
 <p>If you need to mix client-level and request-level options in a way that is not supported by the default <a href="#merging-of-parameters">Merging of parameters</a>, you can use <code>.build_request()</code> and then make arbitrary modifications to the <code>Request</code> instance. For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X-Api-Key&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;X-Client-ID&quot;</span><span class="p">:</span> <span class="s2">&quot;ABC123&quot;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X-Api-Key&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;X-Client-ID&quot;</span><span class="p">:</span> <span class="s2">&quot;ABC123&quot;</span><span class="p">}</span>
 
 <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="n">request</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">build_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://api.example.com&quot;</span><span class="p">)</span>
@@ -1274,6 +1286,7 @@
     <span class="o">...</span>
 </code></pre></div>
 
+
 <h2 id="event-hooks">Event Hooks</h2>
 <p>HTTPX allows you to register "event hooks" with the client, that are called
 every time a particular type of event takes place.</p>
@@ -1283,7 +1296,7 @@ every time a particular type of event takes place.</p>
 <li><code>response</code> - Called once the response has been returned. Passed the <code>response</code> instance.</li>
 </ul>
 <p>These allow you to install client-wide functionality such as logging and monitoring.</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">log_request</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">log_request</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request event hook: </span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2"> - Waiting for response&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">log_response</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
@@ -1293,24 +1306,27 @@ every time a particular type of event takes place.</p>
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">event_hooks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">log_request</span><span class="p">],</span> <span class="s1">&#39;response&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">log_response</span><span class="p">]})</span>
 </code></pre></div>
 
+
 <p>You can also use these hooks to install response processing code, such as this
 example, which creates a client instance that always raises <code>httpx.HTTPStatusError</code>
 on 4xx and 5xx responses.</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">raise_on_4xx_5xx</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">raise_on_4xx_5xx</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
     <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">event_hooks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;response&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">raise_on_4xx_5xx</span><span class="p">]})</span>
 </code></pre></div>
+
 
 <p>Event hooks must always be set as a <strong>list of callables</strong>, and you may register
 multiple event hooks for each type of event.</p>
 <p>As well as being able to set event hooks on instantiating the client, there
 is also an <code>.event_hooks</code> property, that allows you to inspect and modify
 the installed hooks.</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
 <span class="n">client</span><span class="o">.</span><span class="n">event_hooks</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_request</span><span class="p">]</span>
 <span class="n">client</span><span class="o">.</span><span class="n">event_hooks</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_response</span><span class="p">,</span> <span class="n">raise_on_4xx_5xx</span><span class="p">]</span>
 </code></pre></div>
+
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1322,7 +1338,7 @@ rather than plain functions.</p>
 <p>If you need to monitor download progress of large responses, you can use response streaming and inspect the <code>response.num_bytes_downloaded</code> property.</p>
 <p>This interface is required for properly determining download progress, because the total number of bytes returned by <code>response.content</code> or <code>response.iter_content()</code> will not always correspond with the raw content length of the response if HTTP response compression is being used.</p>
 <p>For example, showing a progress bar using the <a href="https://github.com/tqdm/tqdm"><code>tqdm</code></a> library while a response is being downloaded could be done like this…</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tempfile</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tempfile</span>
 
 <span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -1340,9 +1356,10 @@ rather than plain functions.</p>
                 <span class="n">num_bytes_downloaded</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">num_bytes_downloaded</span>
 </code></pre></div>
 
+
 <p><img alt="tqdm progress bar" src="../img/tqdm-progress.gif" /></p>
 <p>Or an alternate example, this time using the <a href="https://github.com/willmcgugan/rich"><code>rich</code></a> library…</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tempfile</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">import</span> <span class="nn">rich.progress</span>
 
@@ -1363,6 +1380,7 @@ rather than plain functions.</p>
                 <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">download_task</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">num_bytes_downloaded</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p><img alt="rich progress bar" src="../img/rich-progress.gif" /></p>
 <h2 id="netrc-support">.netrc Support</h2>
 <p>HTTPX supports .netrc file. In <code>trust_env=True</code> cases, if auth parameter is
@@ -1374,15 +1392,17 @@ If you need to refresh the cache (e.g. because the NETRC file has changed),
 you should create a new client or restart the interpreter.</p>
 </div>
 <p>As default <code>trust_env</code> is true. To set false:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.org/&#39;</span><span class="p">,</span> <span class="n">trust_env</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.org/&#39;</span><span class="p">,</span> <span class="n">trust_env</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>If <code>NETRC</code> environment is empty, HTTPX tries to use default files.
 (<code>~/.netrc</code>, <code>~/_netrc</code>)</p>
 <p>To change <code>NETRC</code> environment:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NETRC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;my_default_folder/.my_netrc&quot;</span>
 </code></pre></div>
+
 
 <p>.netrc file content example:</p>
 <div class="codehilite"><pre><span></span><code><span class="n">machine</span> <span class="n">netrcexample</span><span class="p">.</span><span class="n">org</span>
@@ -1392,9 +1412,11 @@ you should create a new client or restart the interpreter.</p>
 <span class="p">...</span>
 </code></pre></div>
 
+
 <p>When using <code>Client</code> instances, <code>trust_env</code> should be set on the client itself, rather that on the request methods:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">trust_env</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">trust_env</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="http-proxying">HTTP Proxying</h2>
 <p>HTTPX supports setting up <a href="https://en.wikipedia.org/wiki/Proxy_server#Web_proxy_servers">HTTP proxies</a> via the <code>proxies</code> parameter to be passed on client initialization or top-level API functions like <code>httpx.get(..., proxies=...)</code>.</p>
@@ -1406,12 +1428,13 @@ you should create a new client or restart the interpreter.</p>
 
 <h3 id="example">Example</h3>
 <p>To route all traffic (HTTP and HTTPS) to a proxy located at <code>http://localhost:8030</code>, pass the proxy URL to the client...</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">proxies</span><span class="o">=</span><span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">proxies</span><span class="o">=</span><span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
 
+
 <p>For more advanced use cases, pass a proxies <code>dict</code>. For example, to route HTTP and HTTPS requests to 2 different proxies, respectively located at <code>http://localhost:8030</code>, and <code>http://localhost:8031</code>, pass a <code>dict</code> of proxy URLs:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;http://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
     <span class="s2">&quot;https://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8031&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -1419,6 +1442,7 @@ you should create a new client or restart the interpreter.</p>
 <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="o">...</span>
 </code></pre></div>
+
 
 <p>For detailed information about proxy routing, see the <a href="#routing">Routing</a> section.</p>
 <div class="admonition tip">
@@ -1429,11 +1453,12 @@ you should create a new client or restart the interpreter.</p>
 </div>
 <h3 id="authentication">Authentication</h3>
 <p>Proxy credentials can be passed as the <code>userinfo</code> section of the proxy URL. For example:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;http://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://username:password@localhost:8030&quot;</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">}</span>
 </code></pre></div>
+
 
 <h3 id="routing">Routing</h3>
 <p>HTTPX provides fine-grained controls for deciding which requests should go through a proxy, and which shouldn't. This process is known as proxy routing.</p>
@@ -1441,61 +1466,69 @@ you should create a new client or restart the interpreter.</p>
 <p>HTTPX supports routing proxies based on <strong>scheme</strong>, <strong>domain</strong>, <strong>port</strong>, or a combination of these.</p>
 <h4 id="wildcard-routing">Wildcard routing</h4>
 <p>Route everything through a proxy...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;all://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <h4 id="scheme-routing">Scheme routing</h4>
 <p>Route HTTP requests through one proxy, and HTTPS requests through another...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;http://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
     <span class="s2">&quot;https://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8031&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <h4 id="domain-routing">Domain routing</h4>
 <p>Proxy all requests on domain "example.com", let other requests pass through...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;all://example.com&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Proxy HTTP requests on domain "example.com", let HTTPS and other requests pass through...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;http://example.com&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Proxy all requests to "example.com" and its subdomains, let other requests pass through...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;all://*example.com&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Proxy all requests to strict subdomains of "example.com", let "example.com" and other requests pass through...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;all://*.example.com&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <h4 id="port-routing">Port routing</h4>
 <p>Proxy HTTPS requests on port 1234 to "example.com"...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;https://example.com:1234&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Proxy all requests on port 1234...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;all://*:1234&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <h4 id="no-proxy-support">No-proxy support</h4>
 <p>It is also possible to define requests that <em>shouldn't</em> be routed through proxies.</p>
 <p>To do so, pass <code>None</code> as the proxy URL. For example...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Route requests through a proxy by default...</span>
     <span class="s2">&quot;all://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8031&quot;</span><span class="p">,</span>
     <span class="c1"># Except those for &quot;example.com&quot;.</span>
@@ -1503,9 +1536,10 @@ you should create a new client or restart the interpreter.</p>
 <span class="p">}</span>
 </code></pre></div>
 
+
 <h4 id="complex-configuration-example">Complex configuration example</h4>
 <p>You can combine the routing features outlined above to build complex proxy routing configurations. For example...</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Route all traffic through a proxy by default...</span>
     <span class="s2">&quot;all://&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8030&quot;</span><span class="p">,</span>
     <span class="c1"># But don&#39;t use proxies for HTTPS requests to &quot;domain.io&quot;...</span>
@@ -1517,6 +1551,7 @@ you should create a new client or restart the interpreter.</p>
     <span class="s2">&quot;http://internal.example.com:5550&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8032&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
+
 
 <h4 id="environment-variables">Environment variables</h4>
 <p>HTTP proxying can also be configured through environment variables, although with less fine-grained control.</p>
@@ -1547,7 +1582,7 @@ you should create a new client or restart the interpreter.</p>
 <h4 id="forcing-the-proxy-mechanism">Forcing the proxy mechanism</h4>
 <p>In most cases, the default behavior should work just fine as well as provide enough security.</p>
 <p>But if you know what you're doing and you want to force which mechanism to use, you can do so by passing an <code>httpx.Proxy()</code> instance, setting the <code>mode</code> to either <code>FORWARD_ONLY</code> or <code>TUNNEL_ONLY</code>. For example...</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Route all requests through an HTTPS proxy, using tunneling only.</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Route all requests through an HTTPS proxy, using tunneling only.</span>
 <span class="n">proxies</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Proxy</span><span class="p">(</span>
     <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://localhost:8030&quot;</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;TUNNEL_ONLY&quot;</span><span class="p">,</span>
@@ -1558,13 +1593,14 @@ you should create a new client or restart the interpreter.</p>
     <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://example.com&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h2 id="timeout-configuration">Timeout Configuration</h2>
 <p>HTTPX is careful to enforce timeouts everywhere by default.</p>
 <p>The default behavior is to raise a <code>TimeoutException</code> after 5 seconds of
 network inactivity.</p>
 <h3 id="setting-and-disabling-timeouts">Setting and disabling timeouts</h3>
 <p>You can set timeouts for an individual request:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Using the top-level API:</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Using the top-level API:</span>
 <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://example.com/api/v1/example&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
 
 <span class="c1"># Using a client instance:</span>
@@ -1572,8 +1608,9 @@ network inactivity.</p>
     <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://example.com/api/v1/example&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Or disable timeouts for an individual request:</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># Using the top-level API:</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Using the top-level API:</span>
 <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://example.com/api/v1/example&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Using a client instance:</span>
@@ -1581,13 +1618,15 @@ network inactivity.</p>
     <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://example.com/api/v1/example&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h3 id="setting-a-default-timeout-on-a-client">Setting a default timeout on a client</h3>
 <p>You can set a timeout on a client instance, which results in the given
 <code>timeout</code> being used as the default for requests made with this client:</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>              <span class="c1"># Use a default 5s timeout everywhere.</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>              <span class="c1"># Use a default 5s timeout everywhere.</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>  <span class="c1"># Use a default 10s timeout everywhere.</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># Disable all timeouts by default.</span>
 </code></pre></div>
+
 
 <h3 id="fine-tuning-the-configuration">Fine tuning the configuration</h3>
 <p>HTTPX also allows you to specify the timeout behavior in more fine grained detail.</p>
@@ -1610,12 +1649,13 @@ configuration here is the maximum number of allowable connections in the
 connection pool, which is configured by the <code>pool_limits</code>.</li>
 </ul>
 <p>You can configure the timeout behavior for any of these values...</p>
-<div class="python codehilite"><pre><span></span><code><span class="c1"># A client with a 60s timeout for connecting, and a 10s timeout elsewhere.</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># A client with a 60s timeout for connecting, and a 10s timeout elsewhere.</span>
 <span class="n">timeout</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Timeout</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://example.com/&#39;</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="pool-limit-configuration">Pool limit configuration</h2>
 <p>You can control the connection pool size using the <code>limits</code> keyword
@@ -1626,15 +1666,16 @@ allow. (Defaults 10)</li>
 <li><code>max_connections</code>, maximum number of allowable connections, or<code>None</code> for no limits.
 (Default 100)</li>
 </ul>
-<div class="python codehilite"><pre><span></span><code><span class="n">limits</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Limits</span><span class="p">(</span><span class="n">max_keepalive_connections</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_connections</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">limits</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Limits</span><span class="p">(</span><span class="n">max_keepalive_connections</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_connections</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="multipart-file-encoding">Multipart file encoding</h2>
 <p>As mentioned in the <a href="/quickstart#sending-multipart-file-uploads">quickstart</a>
 multipart file encoding is available by passing a dictionary with the
 name of the payloads as keys and either tuple of elements or a file-like object or a string as values.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;application/vnd.ms-excel&#39;</span><span class="p">)}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;report.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;application/vnd.ms-excel&#39;</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -1645,6 +1686,7 @@ name of the payloads as keys and either tuple of elements or a file-like object 
 <span class="go">  ...</span>
 <span class="go">}</span>
 </code></pre></div>
+
 
 <p>More specifically, if a tuple is used as a value, it must have between 2 and 3 elements:</p>
 <ul>
@@ -1658,7 +1700,7 @@ on the file name, with unknown file extensions defaulting to "application/octet-
 If the file name is explicitly set to <code>None</code> then HTTPX will not include a content-type
 MIME header field.</li>
 </ul>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;text content&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)}</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;upload-file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;text content&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="go">{</span>
@@ -1671,6 +1713,7 @@ MIME header field.</li>
 <span class="go">}</span>
 </code></pre></div>
 
+
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>It is safe to upload large files this way. File uploads are streaming by default, meaning that only one chunk will be loaded into memory at a time.</p>
@@ -1679,10 +1722,11 @@ MIME header field.</li>
 <p>You can also send multiple files in one go with a multiple file field form.
 To do that, pass a list of <code>(field, &lt;file&gt;)</code> items instead of a dictionary, allowing you to pass multiple items with the same <code>field</code>.
 For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png</code> in one request on the <code>images</code> form field:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;foo.png&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo.png&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;image/png&#39;</span><span class="p">)),</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;foo.png&#39;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo.png&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span> <span class="s1">&#39;image/png&#39;</span><span class="p">)),</span>
 <span class="go">                      (&#39;images&#39;, (&#39;bar.png&#39;, open(&#39;bar.png&#39;, &#39;rb&#39;), &#39;image/png&#39;))]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;https://httpbin.org/post&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 </code></pre></div>
+
 
 <h2 id="customizing-authentication">Customizing authentication</h2>
 <p>When issuing requests or instantiating a client, the <code>auth</code> argument can be used to pass an authentication scheme to use. The <code>auth</code> argument may be one of the following...</p>
@@ -1693,7 +1737,7 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
 <li>A subclass of <code>httpx.Auth</code>.</li>
 </ul>
 <p>The most involved of these is the last, which allows you to create authentication flows involving one or more requests. A subclass of <code>httpx.Auth</code> should implement <code>def auth_flow(request)</code>, and yield any requests that need to be made...</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
 
@@ -1703,8 +1747,9 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
         <span class="k">yield</span> <span class="n">request</span>
 </code></pre></div>
 
+
 <p>If the auth flow requires more that one request, you can issue multiple yields, and obtain the response in each case...</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
 
@@ -1717,9 +1762,10 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
           <span class="k">yield</span> <span class="n">request</span>
 </code></pre></div>
 
+
 <p>Custom authentication classes are designed to not perform any I/O, so that they may be used with both sync and async client instances. If you are implementing an authentication scheme that requires the request body, then you need to indicate this on the class using a <code>requires_request_body</code> property.</p>
 <p>You will then be able to access <code>request.content</code> inside the <code>.auth_flow()</code> method.</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
     <span class="n">requires_request_body</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
@@ -1739,8 +1785,9 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
         <span class="o">...</span>
 </code></pre></div>
 
+
 <p>Similarly, if you are implementing a scheme that requires access to the response body, then use the <code>requires_response_body</code> property.   You will then be able to access response body properties and methods such as <code>response.content</code>, <code>response.text</code>, <code>response.json()</code>, etc.</p>
-<div class="python codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyCustomAuth</span><span class="p">(</span><span class="n">httpx</span><span class="o">.</span><span class="n">Auth</span><span class="p">):</span>
     <span class="n">requires_response_body</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">,</span> <span class="n">refresh_url</span><span class="p">):</span>
@@ -1772,8 +1819,9 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
         <span class="o">...</span>
 </code></pre></div>
 
+
 <p>If you <em>do</em> need to perform I/O other than HTTP requests, such as accessing a disk-based cache, or you need to use concurrency primitives, such as locks, then you should override <code>.sync_auth_flow()</code> and <code>.async_auth_flow()</code> (instead of <code>.auth_flow()</code>). The former will be used by <code>httpx.Client</code>, while the latter will be used by <code>httpx.AsyncClient</code>.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 
@@ -1802,8 +1850,9 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
         <span class="k">yield</span> <span class="n">request</span>
 </code></pre></div>
 
+
 <p>If you only want to support one of the two methods, then you should still override it, but raise an explicit <code>RuntimeError</code>.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="kn">import</span> <span class="nn">sync_only_library</span>
 
 
@@ -1817,18 +1866,20 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Cannot use a sync authentication class with httpx.AsyncClient&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h2 id="ssl-certificates">SSL certificates</h2>
 <p>When making a request over HTTPS, HTTPX needs to verify the identity of the requested host. To do this, it uses a bundle of SSL certificates (a.k.a. CA bundle) delivered by a trusted certificate authority (CA).</p>
 <h3 id="changing-the-verification-defaults">Changing the verification defaults</h3>
 <p>By default, HTTPX uses the CA bundle provided by <a href="https://pypi.org/project/certifi/">Certifi</a>. This is what you want in most cases, even though some advanced situations may require you to use a different set of certificates.</p>
 <p>If you'd like to use a custom CA bundle, you can use the <code>verify</code> parameter.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.org&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="s2">&quot;path/to/client.pem&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Alternatively, you can pass a standard library <code>ssl.SSLContext</code>.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ssl</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ssl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">context</span><span class="o">.</span><span class="n">load_verify_locations</span><span class="p">(</span><span class="n">cafile</span><span class="o">=</span><span class="s2">&quot;/tmp/client.pem&quot;</span><span class="p">)</span>
@@ -1836,29 +1887,34 @@ For instance this request sends 2 files, <code>foo.png</code> and <code>bar.png<
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
 
+
 <p>We also include a helper function for creating properly configured <code>SSLContext</code> instances.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">context</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">create_ssl_context</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">context</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">create_ssl_context</span><span class="p">()</span>
 </code></pre></div>
+
 
 <p>The <code>create_ssl_context</code> function accepts the same set of SSL configuration arguments
 (<code>trust_env</code>, <code>verify</code>, <code>cert</code> and <code>http2</code> arguments)
 as <code>httpx.Client</code> or <code>httpx.AsyncClient</code></p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">context</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">create_ssl_context</span><span class="p">(</span><span class="n">verify</span><span class="o">=</span><span class="s2">&quot;/tmp/client.pem&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://example.org&#39;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
 
+
 <p>Or you can also disable the SSL verification entirely, which is <em>not</em> recommended.</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.org&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
+
 <h3 id="ssl-configuration-on-client-instances">SSL configuration on client instances</h3>
 <p>If you're using a <code>Client()</code> instance, then you should pass any SSL settings when instantiating the client.</p>
-<div class="python codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>The <code>client.get(...)</code> method and other request methods <em>do not</em> support changing the SSL settings on a per-request basis. If you need different SSL settings in different cases you should use more that one client instance, with different settings on each. Each client will then be using an isolated connection pool with a specific fixed SSL configuration on all connections within that pool.</p>
 <h3 id="making-https-requests-to-a-local-server">Making HTTPS requests to a local server</h3>
@@ -1869,11 +1925,12 @@ as <code>httpx.Client</code> or <code>httpx.AsyncClient</code></p>
 <li>Pass the server key/cert files when starting your local server. (This depends on the particular web server you're using. For example, <a href="https://www.uvicorn.org">Uvicorn</a> provides the <code>--ssl-keyfile</code> and <code>--ssl-certfile</code> options.)</li>
 <li>Tell HTTPX to use the certificates stored in <code>client.pem</code>:</li>
 </ol>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://localhost:8000&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="s2">&quot;/tmp/client.pem&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">Response &lt;200 OK&gt;</span>
 </code></pre></div>
+
 
 <h2 id="custom-transports">Custom Transports</h2>
 <p>HTTPX's <code>Client</code> also accepts a <code>transport</code> argument. This argument allows you
@@ -1884,7 +1941,7 @@ sending of the requests.</p>
 class directly, and pass it to the client instance. The <code>httpcore</code> package
 provides a <code>local_address</code> configuration that is only available via this
 low-level API.</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span><span class="o">,</span> <span class="nn">httpcore</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span><span class="o">,</span> <span class="nn">httpcore</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssl_context</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">create_ssl_context</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transport</span> <span class="o">=</span> <span class="n">httpcore</span><span class="o">.</span><span class="n">SyncConnectionPool</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">ssl_context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">,</span>
@@ -1896,8 +1953,9 @@ low-level API.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Similarly, <code>httpcore</code> provides a <code>uds</code> option for connecting via a Unix Domain Socket that is only available via this low-level API:</p>
-<div class="python codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span><span class="o">,</span> <span class="nn">httpcore</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span><span class="o">,</span> <span class="nn">httpcore</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">create_ssl_context</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">httpcore</span><span class="o">.</span><span class="n">SyncConnectionPool</span><span class="p">(</span>
 <span class="o">...</span>     <span class="n">ssl_context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">,</span>
@@ -1912,18 +1970,20 @@ low-level API.</p>
 <span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;Containers&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Images&quot;</span><span class="p">:</span> <span class="mi">74</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
 </code></pre></div>
 
+
 <p>Unlike the <code>httpx.Client()</code>, the lower-level <code>httpcore</code> transport instances
 do not include any default values for configuring aspects such as the
 connection pooling details, so you'll need to provide more explicit
 configuration when using this API.</p>
 <h3 id="urllib3-transport">urllib3 transport</h3>
 <p>This <a href="https://gist.github.com/florimondmanca/d56764d78d748eb9f73165da388e546e">public gist</a> provides a transport that uses the excellent <a href="https://urllib3.readthedocs.io/en/latest/"><code>urllib3</code> library</a>, and can be used with the sync <code>Client</code>...</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">urllib3_transport</span> <span class="kn">import</span> <span class="n">URLLib3Transport</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">URLLib3Transport</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.org&quot;</span><span class="p">)</span>
 <span class="go">&lt;Response [200 OK]&gt;</span>
 </code></pre></div>
+
 
 <h3 id="writing-custom-transports">Writing custom transports</h3>
 <p>A transport instance must implement the Transport API defined by
@@ -1932,7 +1992,7 @@ should either subclass <code>httpcore.AsyncHTTPTransport</code> to implement a t
 use with <code>AsyncClient</code>, or subclass <code>httpcore.SyncHTTPTransport</code> to implement a
 transport to use with <code>Client</code>.</p>
 <p>A complete example of a custom transport implementation would be:</p>
-<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">httpcore</span>
 
 
@@ -1949,8 +2009,9 @@ transport to use with <code>Client</code>.</p>
         <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;HTTP/1.1&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">stream</span>
 </code></pre></div>
 
+
 <p>Which we can use in the same way:</p>
-<div class="pycon codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">httpx</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">HelloWorldTransport</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.org/&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
